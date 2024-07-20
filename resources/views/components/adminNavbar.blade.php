@@ -1,4 +1,4 @@
-<nav class="bg-gray-800" x-data="{ isOpen: false }">
+<nav class="bg-gray-800 lg:px-28 sticky z-10 top-0" x-data="{ isOpen: false }">
          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
             <div class="flex items-center">
@@ -8,13 +8,13 @@
                <div class="hidden md:block">
                   <div class="ml-10 flex items-baseline space-x-4">
                   <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                  <x-navlink href="/" :active="request()->is('/')">Home</x-navlink>
-                  <x-navlink href="/news" :active="request()->is('news')">News</x-navlink>
-                  <x-navlink href="/category" :active="request()->is('category')">Category</x-navlink>
+                  <x-adminNavlink href="/admin/" :active="request()->is('admin')">Home</x-adminNavlink>
+                  <x-adminNavlink href="/admin/news" :active="request()->is('admin/news')">Berita</x-adminNavlink>
+                  <x-adminNavlink href="/admin/category" :active="request()->is('admin/category')">Kategori</x-adminNavlink>
                   </div>
                </div>
             </div>
-            <div class="hidden md:block">
+            <div class="hidden md:block">  
                <div class="ml-4 flex items-center md:ml-6">
                   
 
@@ -66,11 +66,9 @@
             <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                <a href="/" class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} block rounded-md  px-3 py-2 text-base font-medium" aria-current="page">Home</a>
-               <a href="/news" class="{{ request()->is('news') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} block rounded-md  px-3 py-2 text-base font-medium" aria-current="page">News</a>
-               <a href="/category" class="{{ request()->is('category') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} block rounded-md  px-3 py-2 text-base font-medium" aria-current="page">Category</a>
-               {{-- <x-navlink href="/" :active="request()->is('/')">Home</x-navlink>
-                  <x-navlink href="/news" :active="request()->is('news')">News</x-navlink>
-                  <x-navlink href="/category" :active="request()->is('category')">Category</x-navlink> --}}
+               <a href="/news" class="{{ request()->is('news') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} block rounded-md  px-3 py-2 text-base font-medium" aria-current="page">Berita</a>
+               <a href="/category" class="{{ request()->is('category') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} block rounded-md  px-3 py-2 text-base font-medium" aria-current="page">Kategori</a>
+               
             </div>
             <div class="border-t border-gray-700 pb-3 pt-4">
             <div class="flex items-center px-5">
