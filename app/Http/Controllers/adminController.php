@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Mckenziearts\Notify\LaravelNotify;
 
 class adminController extends Controller
 {
@@ -12,8 +14,12 @@ class adminController extends Controller
     */
    public function index()
    {
-      $data = Category::orderBy('category_name', 'asc')->get();
-      return view('admin.category', ['title' => 'Halaman Kategori'], compact('data'));
+      // $data = Category::orderBy('category_name', 'asc')->paginate(5);
+      // if (request('search')) {
+      //    $data = Category::where('category_name', 'like', '%' . request('search') . '%')->paginate(5);
+      // }
+      $data = Category::filter()->latest()->paginate(5);
+      return view('admin.category', ['title' => 'Halaman Kategori'],  compact('data'));
    }
 
    /**
@@ -37,12 +43,19 @@ class adminController extends Controller
          'kategori.max' => 'Input maksimal 25 karakter!',
       ]);
 
-      $data = [
-         'category_name' => $request->input('kategori'),
-      ];
+      $input = $request->input('kategori');
 
-      Category::create($data);
-      return redirect()->Route('admin.category')->with('success', 'Kategori berhasil ditambahkan');
+      $cek = Category::where('category_name', $input)->first();
+
+      if ($cek) {
+         return redirect()->Route('admin.category')->with('error', 'Kategori sudah ada');
+      } else {
+
+         $data = new Category(); // memanggil model
+         $data->category_name = $request->input('kategori'); // inisiasi data dari input
+         $data->save(); // menyimpan data
+         return redirect()->Route('admin.category')->with('success', 'Kategori berhasil ditambahkan'); // redirect ke halaman kategori
+      }
    }
 
    /**
@@ -74,13 +87,26 @@ class adminController extends Controller
          'kategori.max' => 'Input maksimal 25 karakter!',
       ]);
 
-      $data = [
-         'category_name' => $request->input('kategori'),
-      ];
+      $input = $request->input('kategori');
 
-      Category::where('id', $id)->update($data);
+      $cek = Category::where('category_name', $input)->first();
+      if ($cek) {
+         return redirect()->Route('admin.category')->with('error', 'Kategori sudah ada');
+      } else {
 
-      return redirect()->Route('admin.category')->with('success', 'Kategori berhasil diubah');
+         $data = Category::find($id); // membuat objek dari model
+         $data->category_name = $request->input('kategori'); // inisiasi data dari input
+         $data->update(); // menyimpan data
+         return redirect()->Route('admin.category')->with('success', 'Kategori berhasil diubah'); // redirect ke halaman kategori
+      }
+
+      // $data = [
+      //    'category_name' => $request->input('kategori'),
+      // ];
+
+      // Category::where('id', $id)->update($data);
+
+      // return redirect()->Route('admin.category')->with('success', 'Kategori berhasil diubah');
    }
 
    /**
@@ -88,7 +114,9 @@ class adminController extends Controller
     */
    public function destroy(string $id)
    {
-      Category::where('id', $id)->delete();
+      $data = Category::find($id);
+      $data->delete();
+      // Category::where('id', $id)->delete();
       return redirect()->Route('admin.category')->with('success', 'Kategori berhasil dihapus');
    }
 }
