@@ -2,19 +2,6 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="flex flex-col items-center gap-3">
 
-        {{-- <div class="flex flex-col items-center w-full p-3 py-4 bg-white rounded-md shadow">
-         <h1 class="text-2xl font-bold md:mb-3 mb-1 mt-1">Tambah Kategori</h1>
-         <div class="w-full lg:w-2/3 p-4">
-            <form class="w-full mx-auto">
-               <div class="relative z-0 w-full group">
-                     <input type="text" name="kategori" id="kategori" class="mb-3 block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required autocomplete="off"/>
-                     <label for="kategori" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-gray-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama Kategori</label>
-      
-                     <button type="submit" class="text-gray-600 hover:text-white border border-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg lg:text-sm text-xs px-4 py-2 text-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Tambah</button>
-               </div>
-            </form>
-         </div>
-      </div> --}}
 
         {{-- Handle Success --}}
         @if (session('success'))
@@ -221,6 +208,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <div>
+                                    <p class="text-sm mb-3 text-gray-500">Note: Jika kategori ini dihapus, semua berita yang berkaitan dengan kategori ini akan ikut terhapus.</p>
                                     <h3 class="text-lg font-bold">Kategori: {{ $item->category_name }}</h3>
                                 </div>
                                 <button type="submit"

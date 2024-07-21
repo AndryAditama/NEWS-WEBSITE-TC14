@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mckenziearts\Notify\LaravelNotify;
@@ -12,6 +13,8 @@ class adminController extends Controller
    /**
     * Display a listing of the resource.
     */
+
+   //  function untuk CRUD category
    public function index()
    {
       // $data = Category::orderBy('category_name', 'asc')->paginate(5);
@@ -115,8 +118,23 @@ class adminController extends Controller
    public function destroy(string $id)
    {
       $data = Category::find($id);
+      $news = News::where('category_id', $id)->get();
+      // delete news
+      foreach ($news as $key => $value) {
+         $value->delete();
+      }
       $data->delete();
       // Category::where('id', $id)->delete();
       return redirect()->Route('admin.category')->with('success', 'Kategori berhasil dihapus');
+   }
+   //  function untuk CRUD category
+
+
+   // function untuk CRUD berita
+   public function showBerita()
+   {
+      // $data = News::latest()->paginate(5);
+      $data = News::filter(request(['category', 'search']))->latest()->paginate(5);
+      return view('admin.news', ['title' => 'Halaman Berita'],  compact('data'));
    }
 }
