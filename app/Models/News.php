@@ -25,7 +25,11 @@ class News extends Model
    {
 
       $query->when($filters['search'] ?? false, function ($query, $search) {
-         $query->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%');
+         $query->where('title', 'ilike', '%' . $search . '%')
+            ->orWhere('content', 'ilike', '%' . $search . '%')
+            ->whereHas('category', function ($query) use ($search) {
+               $query->where('category_name', 'ilike', '%' . $search . '%');
+            });
       });
 
       $query->when($filters['category'] ?? false, function ($query, $category) {

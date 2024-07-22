@@ -137,4 +137,19 @@ class adminController extends Controller
       $data = News::filter(request(['category', 'search']))->latest()->paginate(5);
       return view('admin.news', ['title' => 'Halaman Berita'],  compact('data'));
    }
+
+   public function destroyBerita(string $id)
+   {
+      $data = News::find($id);
+      $data->delete();
+      return redirect()->Route('admin.news')->with('success', 'Berita berhasil dihapus');
+   }
+
+   public function hitungBerita()
+   {
+
+      $totalBerita = News::count();
+      $totalKategori = Category::count();
+      return view('admin.home', ['title' => 'Halaman Berita'],  compact('totalBerita', 'totalKategori'));
+   }
 }

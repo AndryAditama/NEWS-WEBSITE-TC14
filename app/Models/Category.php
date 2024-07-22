@@ -15,7 +15,7 @@ class Category extends Model
 
    public function scopeFilter(Builder $query): void
    {
-      $query->where('category_name', 'like', '%' . request('search') . '%');
+      $query->where('category_name', 'ilike', '%' . request('search') . '%');
    }
 
    public function news(): HasMany

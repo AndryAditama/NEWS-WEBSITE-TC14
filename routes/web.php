@@ -3,9 +3,7 @@
 use App\Http\Controllers\adminController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-   return view('/welcome');
-});
+Route::get('/', [adminController::class, 'hitungBerita'])->name('admin.home');
 
 Route::get('/admin/', function () {
    return view('admin.home', ['title' => 'Halaman Home'], ['name' => 'John Doe']);
@@ -21,3 +19,6 @@ Route::put('/admin/category/{id}', [adminController::class, 'update'])->name('ad
 Route::delete('/admin/category/{id}', [adminController::class, 'destroy'])->name('admin.category.delete');
 
 Route::get('/admin/news', [adminController::class, 'showBerita'])->name('admin.news');
+Route::delete('/admin/news/{id}', [adminController::class, 'destroyBerita'])->name('admin.news.delete');
+
+Route::get('/admin', [adminController::class, 'hitungBerita'])->name('admin.home');
