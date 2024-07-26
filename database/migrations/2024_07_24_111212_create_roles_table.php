@@ -11,15 +11,9 @@ return new class extends Migration
     */
    public function up(): void
    {
-      Schema::create('news', function (Blueprint $table) {
+      Schema::create('roles', function (Blueprint $table) {
          $table->id();
-         $table->string('title');
-         $table->text('content');
-         $table->foreignId('category_id')->constrained(
-            table: 'categories',
-            indexName: 'news_category_id'
-         );
-         $table->string('slug')->unique();
+         $table->string('role_name')->unique();
          $table->timestamps();
       });
    }
@@ -29,6 +23,6 @@ return new class extends Migration
     */
    public function down(): void
    {
-      Schema::dropIfExists('news');
+      Schema::dropIfExists('roles');
    }
 };

@@ -3,10 +3,11 @@
     <div class="flex flex-col items-center gap-3">
 
 
+        {{-- Handle Error --}}
         {{-- Handle Success --}}
         @if (session('success'))
             <div id="alert-border-3"
-                class="fixed bottom-0 right-0 flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
+                class="fixed bottom-0 right-0 flex z-10 items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
                 role="alert">
                 <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 20">
@@ -31,36 +32,34 @@
 
         {{-- Handle Error --}}
         @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                <div id="alert-border-2"
-                    class="fixed bottom-0 right-0 flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
-                    role="alert">
-                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                    </svg>
-                    <div class="ms-3 text-sm font-medium">
-                        {{ $error }}
-                    </div>
-                    <button type="button"
-                        class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
-                        data-dismiss-target="#alert-border-2" aria-label="Close">
-                        <span class="sr-only">Dismiss</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                    </button>
+            <div id="alert-border-2"
+                class="fixed bottom-0 right-0 flex z-10 items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
+                role="alert">
+                <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <div class="ms-3 text-sm font-medium">
+                    {{ 'GAGAL! Inputan tidak valid' }}
                 </div>
-            @endforeach
+                <button type="button"
+                    class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                    data-dismiss-target="#alert-border-2" aria-label="Close">
+                    <span class="sr-only">Dismiss</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
         @endif
 
         {{-- Handle Error Validation --}}
         @if (session('error'))
             <div id="alert-border-2"
-                class="fixed bottom-0 right-0 flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
+                class="fixed bottom-0 right-0 flex z-10 items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
                 role="alert">
                 <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 20 20">
@@ -93,7 +92,7 @@
                     <!-- Modal header -->
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                            Tambah Kategori
+                            Tambah Penulis
                         </h3>
                         <button id="btn" type="button"
                             class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -108,15 +107,57 @@
                     </div>
                     <!-- Modal body -->
                     <div class="p-4 md:p-5">
-                        <form class="space-y-4" action="{{ route('admin.category.store') }}" method="post">
+                        <form class="space-y-4" action="{{ route('admin.author.store') }}" method="post">
                             @csrf
                             <div>
-                                <label for="kategori"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-                                <input type="text" name="kategori" id="kategori"
+                                <div class="flex justify-between items-center">
+
+                                    <label for="name"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                                    <span class="text-red-500 text-xs font-light">*min 3 karakter, max 50
+                                        karakter</span>
+                                </div>
+                                <input type="text" name="name" id="name"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="Nama Kategori" autocomplete="off" required />
+                                    placeholder="Nama Penulis" autocomplete="off" required />
                             </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center">
+
+                                    <label for="email"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                    <span class="text-red-500 text-xs font-light">*Contoh: 0kWqk@example.com</span>
+                                </div>
+                                <input type="email" name="email" id="email"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="Email" autocomplete="off" required />
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center">
+                                    <label for="password"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                    <span class="text-red-500 text-xs font-light">*minimal 6 karakter</span>
+                                </div>
+                                <input type="text" name="password" id="password"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="Password" autocomplete="off" required />
+                            </div>
+                            <div>
+                                    <div class="flex justify-between items-center">
+                                        <label for="password"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                                        <span class="text-red-500 text-xs font-light">*Pilih Role</span>
+                                    </div>
+                                    <select id="role" name="role"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        @foreach ($role as $roles)
+                                        
+                                        <option value="{{ $roles->id }}">{{ $roles->role_name }}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
                             <button type="submit"
                                 class="w-full text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
                         </form>
@@ -129,7 +170,7 @@
         <!-- Modal Edit -->
         <!-- Main modal -->
         @foreach ($data as $item)
-            <div id="modal-edit?id={{ $item['id'] }}" tabindex="-1" aria-hidden="true"
+            <div id="modal-edit?id={{ $item->id }}" tabindex="-1" aria-hidden="true"
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative p-4 w-full max-w-md max-h-full">
                     <!-- Modal content -->
@@ -138,11 +179,11 @@
                         <div
                             class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                Edit Kategori
+                                Edit Penulis
                             </h3>
                             <button id="btn" type="button"
                                 class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-hide="modal-edit?id={{ $item['id'] }}">
+                                data-modal-hide="modal-edit?id={{ $item->id }}">
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 14 14">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -153,17 +194,60 @@
                         </div>
                         <!-- Modal body -->
                         <div class="p-4 md:p-5">
-                            <form class="space-y-4" action="{{ route('admin.category.update', $item['id']) }}"
+                            <form class="space-y-4" action="{{ route('admin.author.update', $item->id) }}"
                                 method="post">
                                 @csrf
                                 @method('put')
                                 <div>
-                                    <label for="kategori"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-                                    <input type="text" name="kategori" id="kategori"
-                                        value="{{ $item['category_name'] }}"
+                                    <div class="flex justify-between items-center">
+
+                                        <label for="name"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                                        <span class="text-red-500 text-xs font-light">*min 3 karakter, max 50
+                                            karakter</span>
+                                    </div>
+                                    <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                        placeholder="Nama Kategori" autocomplete="off" required />
+                                        value="{{ $item->name }}" placeholder="Nama Penulis" autocomplete="off"
+                                        required />
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between items-center">
+                                        <label for="email"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                        <span class="text-red-500 text-xs font-light">*Contoh: 0kWqk@example.com</span>
+                                    </div>
+                                    <input type="email" name="email" id="email"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                        value="{{ $item->email }}" placeholder="Email" autocomplete="off"
+                                        required />
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center">
+                                        <label for="password"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                        <span class="text-red-500 text-xs font-light">*minimal 6 karakter</span>
+                                    </div>
+                                    <input type="text" name="password" id="password"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                        placeholder="Input Password Baru untuk mengubah password"
+                                        autocomplete="off" />
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center">
+                                        <label for="password"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                                        <span class="text-red-500 text-xs font-light">*Pilih Role</span>
+                                    </div>
+                                    <select id="role" name="role"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        @foreach ($role as $roles)
+                                        
+                                        <option value="{{ $roles->id }}" {{ $item->role_id == $roles->id ? 'selected' : '' }}>{{ $roles->role_name }}</option>
+                                        @endforeach
+
+                                    </select>
                                 </div>
                                 <button type="submit"
                                     class="w-full text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
@@ -179,7 +263,7 @@
         <!-- Modal Delete -->
         <!-- Main modal -->
         @foreach ($data as $item)
-            <div id="modal-delete?id={{ $item['id'] }}" tabindex="-1" aria-hidden="true"
+            <div id="modal-delete?id={{ $item->id }}" tabindex="-1" aria-hidden="true"
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative p-4 w-full max-w-md max-h-full">
                     <!-- Modal content -->
@@ -192,7 +276,7 @@
                             </h3>
                             <button id="btn" type="button"
                                 class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-hide="modal-delete?id={{ $item['id'] }}">
+                                data-modal-hide="modal-delete?id={{ $item->id }}">
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 14 14">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -203,14 +287,14 @@
                         </div>
                         <!-- Modal body -->
                         <div class="p-4 md:p-5">
-                            <form class="space-y-4" action="{{ route('admin.category.delete', $item->id) }}"
+                            <form class="space-y-4" action="{{ route('admin.author.delete', $item->id) }}"
                                 method="post">
                                 @csrf
                                 @method('DELETE')
                                 <div>
-                                    <p class="text-sm mb-3 text-gray-500">Note: Jika kategori ini dihapus, semua berita
-                                        yang berkaitan dengan kategori ini akan ikut terhapus.</p>
-                                    <h3 class="text-lg font-bold">Kategori: {{ $item['category_name'] }}</h3>
+                                    <p class="text-sm mb-3 text-gray-500">Note: Jika penulis ini dihapus, semua berita
+                                        yang ditulis oleh penulis ini akan ikut terhapus.</p>
+                                    <h3 class="text-lg font-bold">Penulis: {{ $item->name }}</h3>
                                 </div>
                                 <button type="submit"
                                     class="w-full text-white bg-red-600 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Hapus</button>
@@ -223,7 +307,7 @@
         <!-- End modal Delete-->
 
         <div class="flex flex-col items-center w-full p-3 py-4 bg-white rounded-md shadow">
-            <h1 class="text-2xl font-bold md:mb-3 mb-1 mt-1">Daftar Kategori</h1>
+            <h1 class="text-2xl font-bold md:mb-3 mb-1 mt-1">Daftar Penulis</h1>
             <div class="w-full lg:w-2/3 p-4">
 
                 <div class="relative overflow-x-auto sm:rounded-lg">
@@ -244,6 +328,7 @@
 
 
                             <form class="max-w-lg">
+
                                 @csrf
                                 <div class="flex">
                                     <div class="relative w-full">
@@ -276,10 +361,13 @@
                                         <th scope="col" class="px-6 py-3 rounded-tl-md">
                                             No.
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Kategori
+                                        <th scope="col" class="px-6 py-3 w-80">
+                                            Penulis
                                         </th>
-                                        <th scope="col" class="px-6 py-3 w-10">
+                                        <th scope="col" class="px-6 py-3">
+                                            Role
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 w-80">
                                             Jumlah Berita
                                         </th>
                                         <th scope="col" class="px-6 py-3 rounded-tr-md">
@@ -288,24 +376,27 @@
                                     </tr>
                                 </thead>
                                 <tbody class="tbody">
-                                    
-                                    @foreach ($data as $item => $value)
-                                        <tr class="even:bg-gray-200 dark:bg-gray-800 dark:border-gray-700">
 
+                                    @foreach ($data as $item => $author)
+                                        <tr class="even:bg-gray-200 dark:bg-gray-800 dark:border-gray-700">
                                             <td class="px-6 py-4">
                                                 {{ $item + 1 }}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ $value->category_name }}
+                                                {{ $author->name }}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ $value->news->count() }}
+                                                {{ $author->role->role_name }}
                                             </td>
-                                            <td class="px-6 py-4 w-20 flex items-center">
+                                            <td class="px-6 py-4">
+                                                {{ $author->news->count() }}
+
+                                            </td>
+                                            <td class="px-6 py-4 flex items-center">
                                                 <button type="button"
                                                     class="mt-2 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xl px-2.5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
-                                                    data-modal-target="modal-edit?id={{ $value->id }}"
-                                                    data-modal-toggle="modal-edit?id={{ $value->id }}"><svg
+                                                    data-modal-target="modal-edit?id={{ $author->id }}"
+                                                    data-modal-toggle="modal-edit?id={{ $author->id }}"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="1em"
                                                         height="1em" viewBox="0 0 24 24">
                                                         <path fill="none" stroke="currentColor"
@@ -317,8 +408,8 @@
 
                                                 <button type="button"
                                                     class="mt-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xl px-2.5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                                    data-modal-target="modal-delete?id={{ $value->id }}"
-                                                    data-modal-toggle="modal-delete?id={{ $value->id }}"><svg
+                                                    data-modal-target="modal-delete?id={{ $author->id }}"
+                                                    data-modal-toggle="modal-delete?id={{ $author->id }}"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="1em"
                                                         height="1em" viewBox="0 0 24 24">
                                                         <path fill="none" stroke="currentColor"
@@ -340,6 +431,8 @@
                         <div class="w-full mt-6">
 
                             {{ $data->links() }}
+
+
                         </div>
                     </div>
                 </div>

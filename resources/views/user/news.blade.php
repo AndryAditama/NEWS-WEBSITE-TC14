@@ -29,6 +29,7 @@
                             <form class="max-w-lg">
                               @if (request('category'))
                                 <input type="hidden" name="category" value="{{ request('category') }}">
+                                <input type="hidden" name="author" value="{{ request('author') }}">
                                 @endif
                                 @csrf
                                 <div class="flex">

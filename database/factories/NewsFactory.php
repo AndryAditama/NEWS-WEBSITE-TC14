@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Author;
 use App\Models\Category;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,6 +25,7 @@ class NewsFactory extends Factory
          'title' => fake()->sentence(),
          'content' => fake()->paragraph(),
          'category_id' => Category::factory(),
+         'user_id' => User::factory(),
          'slug' => Str::slug(fake()->sha1()),
       ];
    }

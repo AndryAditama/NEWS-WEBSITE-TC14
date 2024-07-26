@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\News;
+use GuzzleHttp\Client;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Mckenziearts\Notify\LaravelNotify;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Pagination\LengthAwarePaginator;
 
-class adminController extends Controller
+class CategoryController extends Controller
 {
    /**
     * Display a listing of the resource.
     */
-
-   //  function untuk CRUD category
-   public function index()
+   public function index(Request $request)
    {
-      // $data = Category::orderBy('category_name', 'asc')->paginate(5);
-      // if (request('search')) {
-      //    $data = Category::where('category_name', 'like', '%' . request('search') . '%')->paginate(5);
-      // }
+
       $data = Category::filter()->latest()->paginate(5);
       return view('admin.category', ['title' => 'Halaman Kategori'],  compact('data'));
    }
@@ -102,14 +98,6 @@ class adminController extends Controller
          $data->update(); // menyimpan data
          return redirect()->Route('admin.category')->with('success', 'Kategori berhasil diubah'); // redirect ke halaman kategori
       }
-
-      // $data = [
-      //    'category_name' => $request->input('kategori'),
-      // ];
-
-      // Category::where('id', $id)->update($data);
-
-      // return redirect()->Route('admin.category')->with('success', 'Kategori berhasil diubah');
    }
 
    /**
@@ -126,30 +114,5 @@ class adminController extends Controller
       $data->delete();
       // Category::where('id', $id)->delete();
       return redirect()->Route('admin.category')->with('success', 'Kategori berhasil dihapus');
-   }
-   //  function untuk CRUD category
-
-
-   // function untuk CRUD berita
-   public function showBerita()
-   {
-      // $data = News::latest()->paginate(5);
-      $data = News::filter(request(['category', 'search']))->latest()->paginate(5);
-      return view('admin.news', ['title' => 'Halaman Berita'],  compact('data'));
-   }
-
-   public function destroyBerita(string $id)
-   {
-      $data = News::find($id);
-      $data->delete();
-      return redirect()->Route('admin.news')->with('success', 'Berita berhasil dihapus');
-   }
-
-   public function hitungBerita()
-   {
-
-      $totalBerita = News::count();
-      $totalKategori = Category::count();
-      return view('admin.home', ['title' => 'Halaman Berita'],  compact('totalBerita', 'totalKategori'));
    }
 }

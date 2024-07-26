@@ -18,7 +18,7 @@ class Category extends Model
       $query->where('category_name', 'ilike', '%' . request('search') . '%');
    }
 
-   public function news(): HasMany
+   public function news()
    {
       return $this->hasMany(News::class, 'category_id');
    }

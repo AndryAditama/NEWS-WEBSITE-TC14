@@ -16,31 +16,49 @@ class News extends Model
    protected $fillable = [
       'title',
       'content',
-      'category',
-      'author',
+      'category_id',
+      'user_id',
       'slug',
    ];
+
+
+
+   public function category()
+   {
+      return $this->belongsTo(Category::class);
+   }
+
+   public function user()
+   {
+      return $this->belongsTo(User::class);
+   }
+
 
    public function scopeFilter(Builder $query, array $filters): void
    {
 
       $query->when($filters['search'] ?? false, function ($query, $search) {
-         $query->where('title', 'ilike', '%' . $search . '%')
+         return $query->where('title', 'ilike', '%' . $search . '%')
             ->orWhere('content', 'ilike', '%' . $search . '%')
-            ->whereHas('category', function ($query) use ($search) {
+            ->orWhereHas('category', function ($query) use ($search) {
                $query->where('category_name', 'ilike', '%' . $search . '%');
+            })
+            ->orWhereHas('user', function ($query) use ($search) {
+               $query->where('name', 'ilike', '%' . $search . '%');
             });
       });
 
       $query->when($filters['category'] ?? false, function ($query, $category) {
-         $query->whereHas('category', function ($query) use ($category) {
+         return $query->whereHas('category', function ($query) use ($category) {
             $query->where('category_name', $category);
          });
       });
-   }
 
-   public function category(): BelongsTo
-   {
-      return $this->belongsTo(Category::class);
+
+      $query->when($filters['author'] ?? false, function ($query, $user) {
+         return $query->whereHas('user', function ($query) use ($user) {
+            $query->where('name', $user);
+         });
+      });
    }
 }
