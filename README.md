@@ -1,4 +1,4 @@
-# WEBSITE BERITA - TalentClass Fullstack Web Development Batch 14
+## WEBSITE BERITA - TalentClass Fullstack Web Development Batch 14
 - Menggunakan Laravel
 - Menggunakan Tailwind
 - Menggunakan PostgreSQL
@@ -8,16 +8,17 @@
 - FIltering & Pagination
 - dll
 
-# PRASYARAT
+## PRASYARAT
 - PHP >= 8.2
 - Composer >= 2.x.x
 - Node.js >= 20.xx.x
 - NPM => 10.2.3
 - PostgreSQL => 14.12
 
-#CLONE REPOSITORY
-- git clone https://github.com/AndryAditama/NEWS-WEBSITE-TC14.git
-- cd NEWS-WEBSITE-TC14
+##CLONE REPOSITORY
+```sh
+git clone https://github.com/AndryAditama/NEWS-WEBSITE-TC14.git
+cd NEWS-WEBSITE-TC14
 
 #INSTALL DEPENDENSI
 - Instal dependensi PHP menggunakan Composer:
