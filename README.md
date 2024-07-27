@@ -18,11 +18,16 @@
 ##CLONE REPOSITORY
 ```sh
 git clone https://github.com/AndryAditama/NEWS-WEBSITE-TC14.git
+```
+ekstrak zip dan buka folder
+```sh
 cd NEWS-WEBSITE-TC14
-
+```
 #INSTALL DEPENDENSI
 - Instal dependensi PHP menggunakan Composer:
-- composer install
+```sh
+composer install
+```
 - Instal dependensi Node.js menggunakan npm:
 - npm install
 
