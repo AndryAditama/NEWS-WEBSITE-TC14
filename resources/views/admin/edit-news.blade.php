@@ -137,12 +137,22 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penulis</label>
 
                                 </div>
-                                <select id="penulis" name="penulis"
+                                {{-- cek user yang login --}}
+                                @if (Auth::user()->role->role_name == 'Admin')
+                                    <select id="penulis" name="penulis"
                                     class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     @foreach ($author as $item)
-                                        <option value="{{ $item->id }}" {{ $data->user_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}" {{ $data->author_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                     @endforeach
                                 </select>
+                                @endif
+                                @if (Auth::user()->role->role_name == 'Penulis')
+                                    <select id="penulis" name="penulis"
+                                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="{{ auth()->user()->id }}" selected>{{ auth()->user()->name }}</option>
+                                    
+                                </select>
+                                 @endif
                             </div>
                             <div class="mb-2">
                                 <div class="flex justify-between items-center">

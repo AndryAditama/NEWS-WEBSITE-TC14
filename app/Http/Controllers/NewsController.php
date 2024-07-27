@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Category;
-use App\Models\Role;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -16,11 +17,14 @@ class NewsController extends Controller
     */
    public function index()
    {
-      $data = News::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
+      // cek role user yang sedang login
+      $role = Auth::user()->role_id;
+      if ($role == 1) {
+         $data = News::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
+      } else {
+         $data = News::where('user_id', Auth::user()->id)->latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
+      }
 
-      // $data = $data->filter(function ($item) {
-      //    return $item->user && $item->category;
-      // });
       return view('admin.news', ['title' => 'Halaman Berita'],  compact('data'));
    }
 
