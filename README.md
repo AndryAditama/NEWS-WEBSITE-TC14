@@ -3,7 +3,7 @@
 - Menggunakan Tailwind
 - Menggunakan PostgreSQL
 
-# FITUR APLIKASI
+## FITUR APLIKASI
 - Multiuser (admin, penulis)
 - FIltering & Pagination
 - dll
